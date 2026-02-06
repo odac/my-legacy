@@ -1,33 +1,29 @@
-# Legacy Planning AI Assistant
+# Project Blueprint
 
 ## Overview
 
-This tool is a Legacy Planning AI assistant designed for relationship managers (RMs) and insurance agents in Singapore. It helps them collect key client information, generate conversation-ready content, and create actionable checklists to make legacy planning more approachable and efficient.
+This project is a Legacy Planning AI Assistant for Singapore. It helps users generate a legacy plan based on their personal and financial information.
 
-## Features
+## Current State
 
-- **Client Information Form:** A structured form to collect essential client data.
-- **Dynamic Checklist:** A personalized checklist is generated based on the client's marital status.
-- **Actionable Guidance:** For each unchecked item in the checklist, the tool provides Singapore-specific information, next steps, and links to relevant resources.
-- **Modern UI:** A clean, responsive, and user-friendly interface.
+The application is a single-page web application with a form to collect user data and a section to display the generated legacy plan. The styling is basic and needs to be updated.
 
-## Project Structure
+## Requested Change
 
-- `index.html`: The main HTML file containing the structure of the web application, including the form and the checklist container.
-- `style.css`: The CSS file for styling the application, ensuring a professional and modern look.
-- `main.js`: The JavaScript file containing the application's logic, such as handling form submissions, generating the checklist, and displaying information.
-- `blueprint.md`: This file, containing the project's documentation.
+The user wants to update the webpage to a modern, responsive design that adheres to the Standard Chartered Bank's color code and aesthetics.
 
-## Current Task
+## Plan
 
-The current task is to build the initial version of the Legacy Planning AI Assistant.
-
-### Plan
-
-1.  **Create `blueprint.md`:** Document the project's purpose, features, and structure. (Completed)
-2.  **Create `index.html`:** Build the HTML structure with the client information form and a container for the checklist.
-3.  **Create `style.css`:** Style the form and the overall layout to be visually appealing and easy to use.
-4.  **Create `main.js`:**
-    -   Implement the logic to handle the form submission.
-    -   Dynamically generate the checklist based on the client's marital status.
-    -   Provide detailed information and resources for any unchecked items in the checklist.
+1.  **Research Standard Chartered's branding guidelines:** Find the official brand colors, typography, and design elements.
+2.  **Update `style.css`:**
+    *   Update colors to match Standard Chartered's palette (greens, blues).
+    *   Choose a modern, clean font (e.g., from Google Fonts) that aligns with their branding.
+    *   Use CSS Flexbox or Grid for a responsive layout.
+    *   Restyle the header, footer, and form for a modern look.
+    *   Add media queries to ensure responsiveness on different screen sizes.
+3.  **Update `index.html`:**
+    *   Add the Standard Chartered logo to the header.
+    *   Link to any new fonts from Google Fonts.
+4.  **Update `main.js`:**
+    *   Ensure that all existing functionality remains intact.
+    *   Add logic to dynamically display the client's name in the results section.
