@@ -1,14 +1,88 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legacy Planning AI Assistant (Singapore)</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <header>
+        <h1>Legacy Planning AI Assistant</h1>
+        <p>Your guide to clear and actionable legacy planning in Singapore.</p>
+    </header>
+    <main>
+        <section id="client-info-form">
+            <h2>Client Information</h2>
+            <form id="legacyForm">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="birthDate">Birth Date:</label>
+                    <input type="date" id="birthDate" name="birthDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="maritalStatus">Marital Status:</label>
+                    <select id="maritalStatus" name="maritalStatus" required>
+                        <option value="">Select</option>
+                        <option value="single">Single</option>
+                        <option value="married">Married</option>
+                        <option value="divorced">Divorced</option>
+                        <option value="widowed">Widowed</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dependents">Dependents (number):</label>
+                    <input type="number" id="dependents" name="dependents" min="0" value="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="medicalHistory">Medical History (brief description):</label>
+                    <textarea id="medicalHistory" name="medicalHistory" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="assets">Assets (e.g., mortgage, car, insurance, investments, fixed deposits, savings):</label>
+                    <textarea id="assets" name="assets" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="debts">Debts:</label>
+                    <textarea id="debts" name="debts" rows="3"></textarea>
+                </div>
+                <button type="submit">Generate Legacy Plan</button>
+            </form>
+        </section>
+
+        <section id="results" class="hidden">
+            <h2>Legacy Plan for <span id="clientName"></span></h2>
+            <div id="checklist-container">
+                <h3>Action Checklist</h3>
+                <ul id="actionChecklist">
+                    <!-- Checklist items will be dynamically inserted here -->
+                </ul>
+            </div>
+            <div id="resources-container">
+                <h3>Next Steps & Resources</h3>
+                <div id="nextStepsContent">
+                    <!-- Detailed information for unchecked items will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Legacy Planning AI Assistant. All rights reserved.</p>
+    </footer>
+
+    <script src="main.js"></script>
 </body>
 </html>
