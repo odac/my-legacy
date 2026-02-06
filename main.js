@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const actionChecklist = document.getElementById('actionChecklist');
     const nextStepsContent = document.getElementById('nextStepsContent');
     const clientInfoForm = document.getElementById('client-info-form');
+    const conversationStarter = document.getElementById('conversation-starter');
 
     legacyForm.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -20,24 +21,70 @@ document.addEventListener('DOMContentLoaded', () => {
             debts: document.getElementById('debts').value,
         };
 
-        if (formData.maritalStatus === 'single' || formData.maritalStatus === 'divorced') {
-            clientNameSpan.textContent = formData.name;
-            generateChecklist(formData);
-            resultsSection.classList.remove('hidden');
-            clientInfoForm.classList.add('hidden');
-        } else {
-            displayConversationMessage();
-        }
+        const age = calculateAge(formData.birthDate);
+        displayStatistics(formData.name, age, formData.gender);
+
+        clientInfoForm.classList.add('hidden');
+        conversationStarter.classList.remove('hidden');
     });
+
+    function calculateAge(birthDateString) {
+        const birthDate = new Date(birthDateString);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+    function displayStatistics(name, age, gender) {
+        const statsContent = document.getElementById('stats-content');
+        const averageLifespan = gender === 'male' ? 81.3 : 85.9;
+
+        statsContent.innerHTML = `
+            <h2>Hello, ${name}!</h2>
+            <p>You are <strong>${age}</strong> years old.</p>
+            <p>Based on Singapore statistics, the average life expectancy for a ${gender} is <strong>${averageLifespan}</strong> years.</p>
+            <p>This is a great time to start thinking about your legacy. Let's create a plan to ensure your wishes are carried out and your loved ones are protected.</p>
+            <button id="proceed-to-plan">Continue to Legacy Plan</button>
+        `;
+
+        document.getElementById('proceed-to-plan').addEventListener('click', () => {
+            const maritalStatus = document.getElementById('maritalStatus').value;
+            if (maritalStatus === 'single' || maritalStatus === 'divorced') {
+                const formData = {
+                    name: document.getElementById('name').value,
+                    gender: document.getElementById('gender').value,
+                    birthDate: document.getElementById('birthDate').value,
+                    maritalStatus: document.getElementById('maritalStatus').value,
+                    dependents: parseInt(document.getElementById('dependents').value),
+                    medicalHistory: document.getElementById('medicalHistory').value,
+                    assets: document.getElementById('assets').value,
+                    debts: document.getElementById('debts').value,
+                };
+                clientNameSpan.textContent = formData.name;
+                generateChecklist(formData);
+                conversationStarter.classList.add('hidden');
+                resultsSection.classList.remove('hidden');
+            } else {
+                conversationStarter.classList.add('hidden');
+                displayConversationMessage();
+            }
+        });
+    }
 
     function displayConversationMessage() {
         resultsSection.classList.add('hidden');
-        clientInfoForm.innerHTML = `
-            <div class="conversation-message">
-                <h2>Continue to Legacy Planning Conversation</h2>
-                <p>To provide you with the most accurate and personalized legacy plan, we need to gather more details about your specific situation. Please continue the conversation with our AI assistant.</p>
-            </div>
+        const conversationMessage = document.createElement('div');
+        conversationMessage.classList.add('conversation-message');
+        conversationMessage.innerHTML = `
+            <h2>Continue to Legacy Planning Conversation</h2>
+            <p>To provide you with the most accurate and personalized legacy plan, we need to gather more details about your specific situation. Please continue the conversation with our AI assistant.</p>
         `;
+        const main = document.querySelector('main');
+        main.appendChild(conversationMessage);
     }
 
     function generateChecklist(data) {
@@ -110,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <ul>
                             <li>Consider consulting a lawyer to draft your Will. This ensures it is legally sound and reflects your intentions accurately.</li>
                             <li>Resources for finding lawyers: The Law Society of Singapore has a <a href="https://www.lawsociety.org.sg/for-the-public/find-a-lawyer/" target="_blank">"Find a Lawyer" directory</a>.</li>
-                            <li>Public Trustee\'s Office (PTO) offers affordable Will-drafting services for simple cases. More info at <a href="https://www.mlaw.gov.sg/pto/wills/making-a-will/" target="_blank">Ministry of Law - Wills</a>.</li>
+                            <li>Public Trustee's Office (PTO) offers affordable Will-drafting services for simple cases. More info at <a href="https://www.mlaw.gov.sg/pto/wills/making-a-will/" target="_blank">Ministry of Law - Wills</a>.</li>
                             <li>Ensure your Will is properly witnessed (two witnesses, not beneficiaries) and kept in a safe place, with copies provided to your executor.</li>
                         </ul>
                     `;
