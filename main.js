@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const clientNameSpan = document.getElementById('clientName');
     const actionChecklist = document.getElementById('actionChecklist');
     const nextStepsContent = document.getElementById('nextStepsContent');
+    const clientInfoForm = document.getElementById('client-info-form');
 
     legacyForm.addEventListener('submit', function(event) {
         event.preventDefault();
         
-        // Collect form data
         const formData = {
             name: document.getElementById('name').value,
             gender: document.getElementById('gender').value,
@@ -20,14 +20,29 @@ document.addEventListener('DOMContentLoaded', () => {
             debts: document.getElementById('debts').value,
         };
 
-        clientNameSpan.textContent = formData.name;
-        generateChecklist(formData);
-        resultsSection.classList.remove('hidden');
+        if (formData.maritalStatus === 'single' || formData.maritalStatus === 'divorced') {
+            clientNameSpan.textContent = formData.name;
+            generateChecklist(formData);
+            resultsSection.classList.remove('hidden');
+            clientInfoForm.classList.add('hidden');
+        } else {
+            displayConversationMessage();
+        }
     });
 
+    function displayConversationMessage() {
+        resultsSection.classList.add('hidden');
+        clientInfoForm.innerHTML = `
+            <div class="conversation-message">
+                <h2>Continue to Legacy Planning Conversation</h2>
+                <p>To provide you with the most accurate and personalized legacy plan, we need to gather more details about your specific situation. Please continue the conversation with our AI assistant.</p>
+            </div>
+        `;
+    }
+
     function generateChecklist(data) {
-        actionChecklist.innerHTML = ''; // Clear previous checklist
-        nextStepsContent.innerHTML = ''; // Clear previous next steps
+        actionChecklist.innerHTML = ''; 
+        nextStepsContent.innerHTML = ''; 
 
         const checklistItems = [
             { id: 'cpfNomination', label: 'CPF Nomination', applicable: true },
@@ -36,15 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: 'advanceCarePlanning', label: 'Advance Care Planning', applicable: true },
             { id: 'organDonation', label: 'Organ Donation Wishes', applicable: true },
         ];
-
-        // Filter checklist based on marital status
-        if (data.maritalStatus === 'married') {
-            // For married individuals, CPF nomination might be handled differently,
-            // but for simplicity, we'll keep all items for now.
-            // Future enhancement: tailor more specifically for married status.
-        } else if (data.maritalStatus === 'single' || data.maritalStatus === 'divorced' || data.maritalStatus === 'widowed') {
-            // All items are applicable
-        }
         
         checklistItems.forEach(item => {
             if (item.applicable) {
@@ -62,15 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.appendChild(label);
                 actionChecklist.appendChild(li);
 
-                // Add event listener to each checkbox to generate next steps
                 checkbox.addEventListener('change', () => generateNextSteps(data));
             }
         });
-        generateNextSteps(data); // Generate initial next steps based on unchecked items
+        generateNextSteps(data); 
     }
 
     function generateNextSteps(data) {
-        nextStepsContent.innerHTML = ''; // Clear previous content
+        nextStepsContent.innerHTML = '';
 
         const uncheckedItems = Array.from(actionChecklist.querySelectorAll('input[type="checkbox"]:not(:checked)'));
 
@@ -105,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <ul>
                             <li>Consider consulting a lawyer to draft your Will. This ensures it is legally sound and reflects your intentions accurately.</li>
                             <li>Resources for finding lawyers: The Law Society of Singapore has a <a href="https://www.lawsociety.org.sg/for-the-public/find-a-lawyer/" target="_blank">"Find a Lawyer" directory</a>.</li>
-                            <li>Public Trustee's Office (PTO) offers affordable Will-drafting services for simple cases. More info at <a href="https://www.mlaw.gov.sg/pto/wills/making-a-will/" target="_blank">Ministry of Law - Wills</a>.</li>
+                            <li>Public Trustee\'s Office (PTO) offers affordable Will-drafting services for simple cases. More info at <a href="https://www.mlaw.gov.sg/pto/wills/making-a-will/" target="_blank">Ministry of Law - Wills</a>.</li>
                             <li>Ensure your Will is properly witnessed (two witnesses, not beneficiaries) and kept in a safe place, with copies provided to your executor.</li>
                         </ul>
                     `;
