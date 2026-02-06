@@ -1,9 +1,9 @@
 
 :root {
-    --primary-green: #007934;
-    --primary-blue: #022658;
-    --light-grey: #f4f7f6;
-    --dark-grey: #333;
+    --primary-dark: #1A3263;
+    --primary-mid: #547792;
+    --primary-accent: #FAB95B;
+    --section-bg: #E8E2DB;
     --white: #ffffff;
     --border-color: #ccc;
     --shadow-color: rgba(0, 0, 0, 0.1);
@@ -13,7 +13,7 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--primary-blue);
+    background-color: var(--primary-dark);
     color: var(--white);
     line-height: 1.6;
 }
@@ -36,7 +36,7 @@ header {
 header h1 {
     margin: 0;
     font-size: 2.5rem;
-    color: var(--white);
+    color: var(--section-bg);
     font-weight: 700;
 }
 
@@ -44,7 +44,7 @@ header p {
     text-align: center;
     margin-top: 0.5rem;
     font-size: 1.2rem;
-    color: var(--white);
+    color: var(--primary-accent);
     font-weight: 300;
 }
 
@@ -55,8 +55,8 @@ main {
 }
 
 section {
-    background-color: var(--white);
-    color: var(--dark-grey);
+    background-color: var(--section-bg);
+    color: var(--primary-dark);
     padding: 2rem;
     margin-bottom: 2rem;
     border-radius: 8px;
@@ -64,10 +64,10 @@ section {
 }
 
 h2 {
-    color: var(--primary-green);
+    color: var(--primary-mid);
     font-size: 2rem;
     margin-top: 0;
-    border-bottom: 2px solid #e0e0e0;
+    border-bottom: 2px solid #dcdcdc;
     padding-bottom: 0.5rem;
     margin-bottom: 1.5rem;
     font-weight: 500;
@@ -81,7 +81,7 @@ h2 {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
-    color: #555;
+    color: var(--primary-mid);
 }
 
 .form-group input[type="text"],
@@ -95,6 +95,8 @@ h2 {
     border-radius: 4px;
     font-size: 1rem;
     box-sizing: border-box; 
+    background-color: var(--white);
+    color: var(--primary-dark);
 }
 
 .form-group textarea {
@@ -102,8 +104,8 @@ h2 {
 }
 
 button {
-    background-color: var(--primary-green);
-    color: var(--white);
+    background-color: var(--primary-accent);
+    color: var(--primary-dark);
     padding: 12px 25px;
     border: none;
     border-radius: 5px;
@@ -117,15 +119,15 @@ button {
 }
 
 button:hover {
-    background-color: #005a28;
+    background-color: #e3a84f;
 }
 
 .hidden {
     display: none;
 }
 
-#results h3 {
-    color: var(--primary-green);
+#results h3, #conversation-starter h3 {
+    color: var(--primary-mid);
     font-size: 1.5rem;
     margin-top: 1.5rem;
     margin-bottom: 1rem;
@@ -138,7 +140,7 @@ button:hover {
 }
 
 #actionChecklist li {
-    background-color: #ecf0f1;
+    background-color: var(--white);
     border: 1px solid #dcdcdc;
     padding: 12px 15px;
     margin-bottom: 8px;
@@ -150,19 +152,19 @@ button:hover {
 #actionChecklist li input[type="checkbox"] {
     margin-right: 10px;
     transform: scale(1.2);
-    accent-color: var(--primary-green);
+    accent-color: var(--primary-accent);
 }
 
 #nextStepsContent p {
-    background-color: #e8f6f3;
-    border-left: 5px solid var(--primary-green);
+    background-color: #faf8f5;
+    border-left: 5px solid var(--primary-accent);
     padding: 15px;
     margin-bottom: 1rem;
     border-radius: 4px;
 }
 
 #nextStepsContent a {
-    color: var(--primary-blue);
+    color: var(--primary-mid);
     text-decoration: none;
 }
 
@@ -175,7 +177,7 @@ footer {
     padding: 1.5rem 0;
     margin-top: 2rem;
     background-color: transparent;
-    color: var(--white);
+    color: var(--primary-accent);
 }
 
 /* Responsive adjustments */
